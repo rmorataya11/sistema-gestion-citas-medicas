@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRoles;
 
     protected $fillable = [
         'name',
@@ -33,11 +34,11 @@ class User extends Authenticatable
 
     public function appointments(): HasMany
     {
-        return $this->hasMany(Appointment::class, 'doctor_id');
+        return $this->hasMany(Appointment::class , 'doctor_id');
     }
 
     public function doctorSchedules(): HasMany
     {
-        return $this->hasMany(DoctorSchedule::class, 'id_doctor');
+        return $this->hasMany(DoctorSchedule::class , 'id_doctor');
     }
 }
