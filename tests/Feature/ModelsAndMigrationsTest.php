@@ -14,7 +14,7 @@ test('migrations apply and models persist with correct relationships', function 
 
     $patient = Patient::create([
         'first_name' => 'Ana',
-        'last_name' => 'García',
+        'last_name' => 'Garcia',
         'dni' => '12345678A',
         'birth_date' => '1990-05-15',
         'phone' => '600000000',
@@ -38,7 +38,7 @@ test('migrations apply and models persist with correct relationships', function 
         'patient_id' => $patient->id,
         'doctor_id' => $doctor->id,
         'appointment_date' => now()->addDay(),
-        'reason' => 'Revisión general',
+        'reason' => 'Revision general',
         'status' => 'pending',
     ]);
 
@@ -58,7 +58,7 @@ test('cascade deletes patient medical record and appointments', function () {
     $doctor = User::factory()->create(['role' => 'doctor']);
     $patient = Patient::create([
         'first_name' => 'Luis',
-        'last_name' => 'Pérez',
+        'last_name' => 'Perez',
         'dni' => '87654321B',
         'birth_date' => '1985-01-01',
         'phone' => '611111111',

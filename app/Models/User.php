@@ -2,15 +2,38 @@
 
 namespace App\Models;
 
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
     use HasFactory, Notifiable, HasRoles;
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $this->hasAnyRole(['admin', 'doctor', 'assistant']);
+    }
+
+    protected static function booted(): void
+    {
+        static::saved(function (User $user): void {
+            if (! $user->role) {
+                return;
+            }
+
+            if (Role::query()->where('name', $user->role)->doesntExist()) {
+                return;
+            }
+
+            $user->syncRoles([$user->role]);
+        });
+    }
 
     protected $fillable = [
         'name',

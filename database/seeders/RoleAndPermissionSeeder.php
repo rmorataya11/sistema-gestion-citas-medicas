@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class RoleAndPermissionSeeder extends Seeder
 {
@@ -24,12 +24,11 @@ class RoleAndPermissionSeeder extends Seeder
             Permission::firstOrCreate(['name' => $permiso, 'guard_name' => 'web']);
         }
 
+        $assistant = Role::firstOrCreate(['name' => 'assistant', 'guard_name' => 'web']);
+        $assistant->syncPermissions(['gestionar citas', 'ver expedientes']);
 
-        $asistente = Role::firstOrCreate(['name' => 'asistente', 'guard_name' => 'web']);
-        $asistente->syncPermissions(['gestionar citas', 'ver expedientes']);
-
-        $medico = Role::firstOrCreate(['name' => 'medico', 'guard_name' => 'web']);
-        $medico->syncPermissions(['gestionar citas', 'ver expedientes', 'editar expedientes']);
+        $doctor = Role::firstOrCreate(['name' => 'doctor', 'guard_name' => 'web']);
+        $doctor->syncPermissions(['gestionar citas', 'ver expedientes', 'editar expedientes']);
 
         $admin = Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'web']);
         $admin->syncPermissions($permisos);
