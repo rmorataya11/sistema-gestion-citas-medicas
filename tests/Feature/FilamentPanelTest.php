@@ -13,12 +13,12 @@ beforeEach(function (): void {
     $this->seed(RoleAndPermissionSeeder::class);
 });
 
-test('guest is redirected to filament login from admin', function (): void {
+test('invitado es redirigido al login de filament desde admin', function (): void {
     $this->get('/admin')
         ->assertRedirect(route('filament.admin.auth.login'));
 });
 
-test('admin can access filament dashboard', function (): void {
+test('admin puede acceder al dashboard de filament', function (): void {
     $admin = User::factory()->create(['role' => 'admin']);
     $admin->assignRole('admin');
 
@@ -27,7 +27,7 @@ test('admin can access filament dashboard', function (): void {
         ->assertOk();
 });
 
-test('doctor cannot access user management', function (): void {
+test('doctor no puede acceder a gestion de usuarios', function (): void {
     $doctor = User::factory()->create(['role' => 'doctor']);
     $doctor->assignRole('doctor');
 
@@ -36,7 +36,7 @@ test('doctor cannot access user management', function (): void {
         ->assertForbidden();
 });
 
-test('doctor can access appointments index', function (): void {
+test('doctor puede acceder al listado de citas', function (): void {
     $doctor = User::factory()->create(['role' => 'doctor']);
     $doctor->assignRole('doctor');
 
@@ -45,7 +45,7 @@ test('doctor can access appointments index', function (): void {
         ->assertOk();
 });
 
-test('appointment resource query scopes rows for doctor role', function (): void {
+test('la consulta de citas filtra registros para rol doctor', function (): void {
     $doc1 = User::factory()->create(['role' => 'doctor', 'email' => 'doc1@test.com']);
     $doc1->assignRole('doctor');
     $doc2 = User::factory()->create(['role' => 'doctor', 'email' => 'doc2@test.com']);
@@ -74,7 +74,7 @@ test('appointment resource query scopes rows for doctor role', function (): void
     expect(AppointmentResource::getEloquentQuery()->count())->toBe(1);
 });
 
-test('assistant cannot access user management', function (): void {
+test('asistente no puede acceder a gestion de usuarios', function (): void {
     $assistant = User::factory()->create(['role' => 'assistant']);
     $assistant->assignRole('assistant');
 
@@ -83,7 +83,7 @@ test('assistant cannot access user management', function (): void {
         ->assertForbidden();
 });
 
-test('assistant can access patients index', function (): void {
+test('asistente puede acceder al listado de pacientes', function (): void {
     $assistant = User::factory()->create(['role' => 'assistant']);
     $assistant->assignRole('assistant');
 

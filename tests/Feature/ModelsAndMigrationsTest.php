@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
-test('migrations apply and models persist with correct relationships', function () {
+test('migraciones aplican y modelos persisten con relaciones correctas', function () {
     $doctor = User::factory()->create(['role' => 'doctor']);
 
     $patient = Patient::create([
@@ -54,7 +54,7 @@ test('migrations apply and models persist with correct relationships', function 
     expect($appointment->doctor->role)->toBe('doctor');
 });
 
-test('cascade deletes patient medical record and appointments', function () {
+test('el borrado en cascada elimina expediente medico y citas del paciente', function () {
     $doctor = User::factory()->create(['role' => 'doctor']);
     $patient = Patient::create([
         'first_name' => 'Luis',

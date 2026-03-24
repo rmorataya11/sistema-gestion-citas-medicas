@@ -12,15 +12,21 @@ use Illuminate\Database\Seeder;
 
 class ClinicalDataSeeder extends Seeder
 {
+    private const DOCTORS_COUNT = 12;
+
+    private const ASSISTANTS_COUNT = 7;
+
+    private const PATIENTS_COUNT = 24;
+
     public function run(): void
     {
         $doctors = User::factory()
-            ->count(6)
+            ->count(self::DOCTORS_COUNT)
             ->doctor()
             ->create();
 
         $assistants = User::factory()
-            ->count(3)
+            ->count(self::ASSISTANTS_COUNT)
             ->assistant()
             ->create();
 
@@ -32,7 +38,7 @@ class ClinicalDataSeeder extends Seeder
             $assistant->assignRole('assistant');
         }
 
-        $patients = Patient::factory()->count(24)->create();
+        $patients = Patient::factory()->count(self::PATIENTS_COUNT)->create();
 
         foreach ($patients as $patient) {
             MedicalRecord::factory()->create([
