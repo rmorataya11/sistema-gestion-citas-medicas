@@ -37,6 +37,10 @@ class AppointmentPolicy
 
     public function delete(User $user, Appointment $appointment): bool
     {
-        return $this->view($user, $appointment);
+        if ($user->hasRole('doctor')) {
+            return false;
+        }
+
+        return $user->hasPermissionTo('gestionar citas');
     }
 }
