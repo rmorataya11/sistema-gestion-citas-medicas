@@ -15,7 +15,7 @@ test('migrations apply and models persist with correct relationships', function 
     $patient = Patient::create([
         'first_name' => 'Ana',
         'last_name' => 'Garcia',
-        'dni' => '12345678A',
+        'dui' => '12345678-9',
         'birth_date' => '1990-05-15',
         'phone' => '600000000',
     ]);
@@ -47,7 +47,7 @@ test('migrations apply and models persist with correct relationships', function 
     expect($doctor->appointments()->first()->id)->toBe($appointment->id);
     expect($doctor->doctorSchedules()->first()->id)->toBe($schedule->id);
 
-    expect($record->patient->dni)->toBe('12345678A');
+    expect($record->patient->dui)->toBe('12345678-9');
     expect($schedule->doctor->id)->toBe($doctor->id);
 
     expect($appointment->patient->first_name)->toBe('Ana');
@@ -59,7 +59,7 @@ test('cascade deletes patient medical record and appointments', function () {
     $patient = Patient::create([
         'first_name' => 'Luis',
         'last_name' => 'Perez',
-        'dni' => '87654321B',
+        'dui' => '87654321-0',
         'birth_date' => '1985-01-01',
         'phone' => '611111111',
     ]);

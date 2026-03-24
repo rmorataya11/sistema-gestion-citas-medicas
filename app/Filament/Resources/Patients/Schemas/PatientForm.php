@@ -20,8 +20,8 @@ class PatientForm
                 TextInput::make('last_name')
                     ->label('Apellidos')
                     ->required(),
-                TextInput::make('dni')
-                    ->label('DNI')
+                TextInput::make('dui')
+                    ->label('DUI')
                     ->required(),
                 DatePicker::make('birth_date')
                     ->label('Fecha nacimiento')

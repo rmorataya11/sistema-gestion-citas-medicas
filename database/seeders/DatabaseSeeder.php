@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             RoleAndPermissionSeeder::class,
+            ClinicalDataSeeder::class,
         ]);
 
         $admin = User::query()->create([

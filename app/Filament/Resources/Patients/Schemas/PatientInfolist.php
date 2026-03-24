@@ -18,8 +18,8 @@ class PatientInfolist
                             ->label('Nombre'),
                         TextEntry::make('last_name')
                             ->label('Apellidos'),
-                        TextEntry::make('dni')
-                            ->label('DNI'),
+                        TextEntry::make('dui')
+                            ->label('DUI'),
                         TextEntry::make('birth_date')
                             ->label('Fecha nacimiento')
                             ->date(),

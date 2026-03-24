@@ -19,7 +19,7 @@ class PatientsTable
                     ->searchable(),
                 TextColumn::make('last_name')
                     ->searchable(),
-                TextColumn::make('dni')
+                TextColumn::make('dui')
                     ->searchable(),
                 TextColumn::make('birth_date')
                     ->date()

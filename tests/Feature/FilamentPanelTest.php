@@ -54,7 +54,7 @@ test('appointment resource query scopes rows for doctor role', function (): void
     $patient = Patient::create([
         'first_name' => 'Pat',
         'last_name' => 'Ient',
-        'dni' => '99999999Z',
+        'dui' => '99999999-9',
         'birth_date' => '1990-01-01',
         'phone' => '611111111',
     ]);
