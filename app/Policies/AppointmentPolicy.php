@@ -37,6 +37,11 @@ class AppointmentPolicy
 
     public function delete(User $user, Appointment $appointment): bool
     {
-        return $this->view($user, $appointment);
+        return $user->hasPermissionTo('eliminar registros');
+    }
+
+    public function deleteAny(User $user): bool
+    {
+        return $user->hasPermissionTo('eliminar registros');
     }
 }
