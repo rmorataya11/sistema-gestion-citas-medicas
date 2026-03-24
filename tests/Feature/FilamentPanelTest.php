@@ -91,3 +91,27 @@ test('asistente puede acceder al listado de pacientes', function (): void {
         ->get('/admin/patients')
         ->assertOk();
 });
+
+test('doctor no puede eliminar citas por auditoria', function (): void {
+    $doctor = User::factory()->create(['role' => 'doctor']);
+    $doctor->assignRole('doctor');
+
+    $patient = Patient::create([
+        'first_name' => 'Mario',
+        'last_name' => 'Lopez',
+        'dui' => '12345678-1',
+        'birth_date' => '1992-02-10',
+        'phone' => '70000000',
+    ]);
+
+    $appointment = Appointment::create([
+        'patient_id' => $patient->id,
+        'doctor_id' => $doctor->id,
+        'appointment_date' => now()->addDay(),
+        'reason' => 'Control',
+        'status' => 'pending',
+    ]);
+
+    expect($doctor->can('delete', $appointment))->toBeFalse();
+});
+

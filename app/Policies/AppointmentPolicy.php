@@ -37,11 +37,19 @@ class AppointmentPolicy
 
     public function delete(User $user, Appointment $appointment): bool
     {
+        if ($user->hasRole('doctor')) {
+            return false;
+        }
+
         return $user->hasPermissionTo('eliminar registros');
     }
 
     public function deleteAny(User $user): bool
     {
+        if ($user->hasRole('doctor')) {
+            return false;
+        }
+
         return $user->hasPermissionTo('eliminar registros');
     }
 }
